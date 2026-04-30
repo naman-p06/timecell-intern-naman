@@ -1,6 +1,5 @@
 """
 Timecell AI — Task 01: Portfolio Risk Calculator
-Author: [Your Name]
 """
 
 from __future__ import annotations
