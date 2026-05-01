@@ -1,0 +1,15 @@
+# Environment / secrets — NEVER commit these
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
