@@ -1,7 +1,5 @@
 """
 Timecell AI — Task 03: AI-Powered Portfolio Explainer
-Author: [Your Name]
-
 Uses Groq (llama-3.1-8b-instant) to generate plain-English portfolio risk
 explanations in the voice of a senior wealth advisor named Arjun.
 
@@ -523,7 +521,7 @@ def print_report(output: ExplainerOutput, show_raw: bool = True) -> None:
 
     vc = VERDICT_COLOUR.get(output.verdict, "yellow")
     print(_c(f"  ┌─────────────────────────────────┐", vc))
-    print(_c(f"  │   VERDICT :  {output.verdict:<19}│", vc, "bold"))
+    print(_c(f"  │  VERDICT :  {output.verdict:<19}│", vc, "bold"))
     print(_c(f"  └─────────────────────────────────┘", vc))
     print()
 
