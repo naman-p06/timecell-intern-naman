@@ -572,7 +572,7 @@ def explain_portfolio(
     tone: Tone = "experienced",
     run_critique: bool = False,
     demo: bool = False,
-) -> ExplainerOutput:
+) -> tuple[ExplainerOutput, str | None]:
 
     context     = build_portfolio_context(portfolio)
     sys_prompt  = build_system_prompt(tone)
@@ -590,12 +590,12 @@ def explain_portfolio(
     print(_c("  [3/3]  Parsing structured output.", "dim"))
     output = parse_response(raw, tone, used_fallback=demo)
 
+    critique_raw = None
     if run_critique:
         print(_c("  [+]    Running critique (2nd LLM call)...", "dim"))
         critique_raw = DEMO_CRITIQUE if demo else critique_explanation(output, context)
-        print_critique(critique_raw)
 
-    return output
+    return output, critique_raw
 
 
 # ─────────────────────────────────────────────────────────────
@@ -617,8 +617,8 @@ def main() -> None:
         help="Which portfolio to analyse (default: sample)",
     )
     parser.add_argument(
-        "--critique", action="store_true",
-        help="Run a second LLM call to critique the first explanation",
+    "--critique", action="store_true", default=True,
+    help="Run a second LLM call to critique the first explanation",
     )
     parser.add_argument(
         "--demo", action="store_true",
@@ -631,13 +631,15 @@ def main() -> None:
     args = parser.parse_args()
 
     try:
-        output = explain_portfolio(
+        output, critique_raw = explain_portfolio(
             portfolio    = PORTFOLIOS[args.portfolio],
             tone         = args.tone,
-            run_critique = args.critique,
+            run_critique = True,
             demo         = args.demo,
         )
         print_report(output, show_raw=not args.no_raw)
+        if critique_raw:
+            print_critique(critique_raw)
 
     except EnvironmentError as e:
         print(_c(f"\n  ❌  {e}", "red"), file=sys.stderr)

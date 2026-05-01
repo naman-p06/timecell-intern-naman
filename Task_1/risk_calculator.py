@@ -244,7 +244,7 @@ def render_side_by_side(both: dict) -> None:
     moderate = both["moderate"]
 
     print(_colour("\n  ┌─────────────────────────────────────────────┐", "cyan"))
-    print(_colour("  │     TIMECELL — PORTFOLIO RISK DASHBOARD      │", "cyan"))
+    print(_colour("  │     TIMECELL — PORTFOLIO RISK DASHBOARD     │", "cyan"))
     print(_colour("  └─────────────────────────────────────────────┘", "cyan"))
 
     render_scenario_table(severe)

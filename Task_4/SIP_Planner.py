@@ -165,12 +165,12 @@ def print_summary(res: dict, goal_label: str):
         print(f"  │{'':^{w}}│")
 
     print()
-    print(f"  ┌{'─'*w}┐")
+    # print(f"  ┌{'─'*w}┐")
     title = f"📋  PLAN SUMMARY — {goal_label.upper()}"
-    print(f"  │  {BOLD}{title:<{w-2}}{RESET}  │")
+    print(f"    {BOLD}{title:<{w-2}}{RESET}  ")
     divider()
     blank()
-    row("Goal Amount",        fmt_inr(res['goal']),             YELLOW)
+    row("Goal Amount",        fmt_inr(res['goal'])  ,             YELLOW)
     row("Time Horizon",       f"{res['years']} years",          CYAN)
     row("Expected Return",    f"{res['annual_return']}% p.a.",  CYAN)
     row("Existing Savings",   fmt_inr(res['current_savings']),  GREEN)
